@@ -9,4 +9,4 @@
 
 2) There is also a makefile included for those who wish to branch the code and execute locally without the .jar or to review the code itself.
 
-3) The .jar is a double click execution. The java make file can be used by navigating to the host directory on your machine, typing make all, then CryptoProject.
+3) The .jar is a double click execution. The java make file can be used by navigating to the host directory on your machine, typing make all, then Crypto.
