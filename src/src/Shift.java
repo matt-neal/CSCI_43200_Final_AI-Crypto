@@ -1,7 +1,5 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.charset.Charset;
 
 /** Brute force Caeser shift.
  *  Each shift of cipher will be given an entropy (frequency) amount
@@ -31,14 +29,14 @@ class Shift {
         return res;
     }
 
-    private void bruteShift() throws IOException{
+    private void bruteShift() throws IOException {
         ReadFile RF = new ReadFile();
-        WriteFile WF = new Writefile();
+        WriteFile WF = new WriteFile();
 
         System.out.println("Please enter file path!");
         String fileName = String.valueOf(System.in);
         // Read input text using defined method
-        String text = RF.readBlockIn(fileName);
+        String text = RF.readBlockIn(fileName, Charset.defaultCharset());
 
         // This variable stores the value of lowest entropy so far.
         // Initialize with very large value, because all entropies are positive
@@ -51,19 +49,18 @@ class Shift {
         // Try all possible keys
         for (int key = 0; key < 26; ++key) {
 
-            // We pass -key, because our method shifts characters to the right,
-            // so we pass negative value to make it shift to the left.
-            String decodedText = encodeCaesar(text, -key);
-            double entropy = getEntropy(decodedText);
+            double entropy = getEntropy(text);
             if (entropy < lowestEntropy) {
                 lowestEntropy = entropy;
-                lowestEntropyString = decodedText;
+                lowestEntropyString = text;
             }
         }
 
         // Write output to a file
+        System.out.println("Please enter a new file name!");
+        String writeFileName = String.valueOf(System.in);
+        WF.outputFile(lowestEntropyString, writeFileName);
         System.out.println(lowestEntropyString);
-        WF.outputFile(lowestEntropyString);
     }
 
     void execute() throws IOException {
