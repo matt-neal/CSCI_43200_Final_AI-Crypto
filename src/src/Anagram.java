@@ -1,28 +1,41 @@
+//BRUTE FORCE TRANSPOSITION USING
+//4 COLUMN KEY AND RANDOMLY GENERATES
+//PERMUTATION OF 1-4 TO CHANGE COLUMN ORDER
+//SHOULD CHECK AGAINST DICTIONARY FOR CORRECT PERMUTATION ORDER
+
+//CAN ALSO BE DONE DYNAMICALLY (EXHAUSTIVELY USING DICTIONARY ATTACK)
+//BY GUESSING AT KEYWORDS IN THE DICTIONARY TEXT FILE
 
 import java.util.*;
 import java.io.*;
 import java.lang.*;
 
 class Anagram {
-    static String input = new readFile().readFileContents();
+    static String text = new readFile().readFileContents();
 
-    public static void execute(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        String line = System.getProperty("line.separator");
-        scan.useDelimiter(line);
+    //ARRANGE STRING IN GRID FORMAT
+    public static int[] arrangeKey(String key) {
+        //arrange position of grid
+        //i.e. if key is 4 letter word, rows are four columns long
+        //String[] keys = key.split(""); //if using dynamically changing key
+        String[] keys = 4;
+        Arrays.sort(keys);
+        int[] num = new int[key.length()];
+        for (int x = 0; x < keys.length; x++) {
+            for (int y = 0; y < key.length(); y++) {
+                if (keys[x].equals(key.charAt(y) + "")) {
+                    num[y] = x;
+                    break;
+                }
+            }
+        }
 
-        //System.out.print("Enter Encrypted String:");
-        text = scan.next();//will come from file
-
-        //System.out.print("Enter Key:");
-        key = scan.next();//auto generated within amount of chars in columns
-
-        System.out.println(decrypt(key, text));
-        break;
-
+        return num;
     }
 
+    //reorders columns according to key
     public static String decrypt(String key, String text) {
+        //key = random permutation of 4
         int[] arrange = arrangeKey(key);
         int lenkey = arrange.length;
         int lentext = text.length();
@@ -43,7 +56,6 @@ class Anagram {
                 }
             }
         }
-
         String dec = "";
         for (int x = 0; x < row; x++) {
             for (int y = 0; y < lenkey; y++) {
@@ -54,20 +66,11 @@ class Anagram {
         return dec;
     }
 
-    public static int[] arrangeKey(String key) {
-        //arrange position of grid
-        String[] keys = key.split("");
-        Arrays.sort(keys);
-        int[] num = new int[key.length()];
-        for (int x = 0; x < keys.length; x++) {
-            for (int y = 0; y < key.length(); y++) {
-                if (keys[x].equals(key.charAt(y) + "")) {
-                    num[y] = x;
-                    break;
-                }
-            }
-        }
+    public static void execute(String[] args) {
+        String line = System.getProperty("line.separator");
+        scan.useDelimiter(line);
 
-        return num;
+        System.out.println(decrypt(key, text));
+        break;
     }
 }
