@@ -3,22 +3,13 @@
 //ONE WITH LOWEST ENTROPY IS ASSUMED TO BE MOST SIMILAR TO ENGLISH
 //THEREFORE IT IS THE DECRYPTED MESSAGE
 
-
+import ReadFile;
 import java.util.Scanner;
 import java.io.*;
 
 public class Shift {
     // Method that reads all text from a file with the given name
-    public static String readTextFromFile(String fileName) throws IOException {
-        File inputFile = new File(fileName);
-        Scanner input = new Scanner(inputFile);
-
-        String res = "";
-        while (input.hasNextLine()) {
-            res += input.nextLine();
-        }
-        return res;
-    }
+    static String testInput = new readFile().readFileContents();
 
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
