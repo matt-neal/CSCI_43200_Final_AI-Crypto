@@ -52,6 +52,9 @@ class Anagram {
                 if (arrange[x] == y) {
                     for (int z = 0; z < row; z++) {
                         grid[z][y] = get[arrange[y]].charAt(z);
+
+                        //check against dicitionary for matches
+                        //if no match begin loop again
                     }
                 }
             }
