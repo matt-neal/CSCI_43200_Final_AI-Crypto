@@ -16,7 +16,6 @@ public class Shift {
     }
         return res;
 
-
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
     public static double getEntropy(String str) {
@@ -38,12 +37,7 @@ public class Shift {
         return res;
     }
 
-    public static void main(String[] args) throws IOException {
-        // Check if we have enough parameters
-        //if (args.length != 2) {
-            //System.out.println("Wrong number of parameters. Usage: java Caesar <input file> <output file>");
-           //return;
-        //}
+    public static void execute(String[] args){
 
         // Read input text using defined method
         String text = readTextFromFile(args[0]);
