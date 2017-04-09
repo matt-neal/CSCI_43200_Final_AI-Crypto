@@ -1,5 +1,3 @@
-import com.sun.deploy.config.AutoUpdater;
-
 /**
  * Command factory which creates new instances of each potential decryption (potentially
  * encryption for future) and calls that method's required methods so as to abstract out
