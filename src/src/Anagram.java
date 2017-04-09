@@ -12,7 +12,7 @@ class Anagram {
         scan.useDelimiter(line);
 
         //System.out.print("Enter Encrypted String:");
-        text = scan.next();//will from file
+        text = scan.next();//will come from file
 
         //System.out.print("Enter Key:");
         key = scan.next();//auto generated within amount of chars in columns
