@@ -17,6 +17,7 @@ public class Shift {
         res += input.nextLine();
     }
         return res;
+
     public static String encrypt(String plainText, int shiftKey)
     {
         plainText = plainText.toLowerCase();
