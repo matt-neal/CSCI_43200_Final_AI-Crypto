@@ -6,11 +6,11 @@ import java.util.Scanner;
  * Designed so that if any additional functionality is added at a later date,
  * Refactoring is not particularly necessary.
  */
-public class FrontController {
-    boolean valid = true;
-    DecryptController DC = new DecryptController();
+class FrontController {
+    private boolean valid = true;
+    private DecryptController DC = new DecryptController();
 
-    public void landingPage() {
+    void landingPage() {
         Scanner landingChoice = new Scanner(System.in);
 
         /*
