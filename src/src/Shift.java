@@ -15,7 +15,23 @@ public class Shift {
         res += input.nextLine();
     }
         return res;
+    public static String encrypt(String plainText, int shiftKey)
+    {
+        plainText = plainText.toLowerCase();
+        String cipherText = "";
+        for (int i = 0; i < plainText.length(); i++)
+        {
+            char replaceVal = plainText.charAt(i);
+            int charPosition = ALPHABET.indexOf(replaceVal);
+            if(charPosition != -1) {
+                int keyVal = (shiftKey + charPosition) % 26;
+                replaceVal = ALPHABET.charAt(keyVal);
+            }
 
+            cipherText += replaceVal;
+        }
+        return cipherText;
+    }
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
     public static double getEntropy(String str) {
