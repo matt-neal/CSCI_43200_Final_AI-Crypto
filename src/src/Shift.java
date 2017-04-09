@@ -9,7 +9,13 @@ import java.io.*;
 
 public class Shift {
     // Method that reads all text from a file with the given name
-    static String testInput = new readFile().readFileContents();
+    static String input = new readFile().readFileContents();
+    String res = "";
+        while (input.hasNextLine()) {
+        res += input.nextLine();
+    }
+        return res;
+
 
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
