@@ -27,19 +27,43 @@ class DecryptController {
 
             if (Objects.equals(in, "1")) {
                 valid = false;
-                CF.anagram();
+                try {
+                    CF.anagram();
+                }
+                catch (Exception e) {
+                    System.out.println("IO Exception: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
             else if (Objects.equals(in, "2")) {
                 valid = false;
-                CF.keyword();
+                try {
+                    CF.keyword();
+                }
+                catch (Exception e) {
+                    System.out.println("IO Exception: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
             else if (Objects.equals(in, "3")) {
                 valid = false;
-                CF.shift();
+                try {
+                    CF.shift();
+                }
+                catch (Exception e) {
+                    System.out.println("IO Exception: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
             else if (Objects.equals(in, "4")) {
                 valid = false;
-                CF.automate();
+                try {
+                    CF.automate();
+                }
+                catch (Exception e) {
+                    System.out.println("IO Exception: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
             else {
                 System.out.println("Invalid entry, try again.");

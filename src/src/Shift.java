@@ -1,43 +1,17 @@
-//BRUTE FORCE CAESAR SHIFT
-//EACH SHIFT OF CIPHER WILL BE GIVEN AN ENTROPY (FREQUENCY) AMOUNT
-//ONE WITH LOWEST ENTROPY IS ASSUMED TO BE MOST SIMILAR TO ENGLISH
-//THEREFORE IT IS THE DECRYPTED MESSAGE
-
-
-
-import ReadFile;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.Scanner;
-import java.io.*;
 
-public class Shift {
-    // Method that reads all text from a file with the given name
-    static String input = new readFile().readFileContents();
-    String res = "";
-        while (input.hasNextLine()) {
-        res += input.nextLine();
-    }
-        return res;
+/** Brute force Caeser shift.
+ *  Each shift of cipher will be given an entropy (frequency) amount
+ *  one with lowest entropy is assumed to be most similar to English
+ *  therefore it is the decrypted message.
+ */
 
-    public static String encrypt(String plainText, int shiftKey)
-    {
-        plainText = plainText.toLowerCase();
-        String cipherText = "";
-        for (int i = 0; i < plainText.length(); i++)
-        {
-            char replaceVal = plainText.charAt(i);
-            int charPosition = ALPHABET.indexOf(replaceVal);
-            if(charPosition != -1) {
-                int keyVal = (shiftKey + charPosition) % 26;
-                replaceVal = ALPHABET.charAt(keyVal);
-            }
-
-            cipherText += replaceVal;
-        }
-        return cipherText;
-    }
+class Shift {
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
-    public static double getEntropy(String str) {
+    private static double getEntropy(String str) {
         double[] freq = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228,
                 0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
                 0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
@@ -56,36 +30,44 @@ public class Shift {
         return res;
     }
 
-    public static void execute(String[] args){
+    private void bruteShift() throws IOException {
+        ReadFile RF = new ReadFile();
+        WriteFile WF = new WriteFile();
+        String fileName;
+        String filePath;
+        Scanner readIn = new Scanner(System.in);
 
+        System.out.println("Please enter file path!");
+        filePath = readIn.next();
         // Read input text using defined method
-        String text = readTextFromFile(args[0]);
+        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
 
         // This variable stores the value of lowest entropy so far.
         // Initialize with very large value, because all entropies are positive
         // and 0 will be less than all of them.
         double lowestEntropy = Double.MAX_VALUE;
+
         // A string corresponding to the lowest entropy.
         String lowestEntropyString = "";
 
         // Try all possible keys
         for (int key = 0; key < 26; ++key) {
-            // We pass -key, because our method shifts characters to the right,
-            // so we pass negative value to make it shift to the left.
-            String decodedText = encodeCaesar(text, -key);
-            double entropy = getEntropy(decodedText);
+
+            double entropy = getEntropy(text);
             if (entropy < lowestEntropy) {
                 lowestEntropy = entropy;
-                lowestEntropyString = decodedText;
+                lowestEntropyString = text;
             }
         }
 
         // Write output to a file
+        System.out.println("Please enter a new file name!");
+        fileName = readIn.next();
+        WF.outputFile(lowestEntropyString, fileName);
         System.out.println(lowestEntropyString);
-        File outputFile = new File(args[1]);
-        BufferedWriter outputWriter =
-                new BufferedWriter(new FileWriter(outputFile.getAbsoluteFile()));
-        outputWriter.write(lowestEntropyString);
-        outputWriter.close();
+    }
+
+    void execute() throws IOException {
+        this.bruteShift();
     }
 }
