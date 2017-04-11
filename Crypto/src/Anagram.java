@@ -1,8 +1,6 @@
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.Arrays;
-import java.util.Scanner;
-
 
 /**BRUTE FORCE TRANSPOSITION USING
  * 4 COLUMN KEY AND RANDOMLY GENERATES
@@ -38,14 +36,9 @@ class Anagram {
     private String decrypt(String key) throws IOException{
         ReadFile RF = new ReadFile();
         WriteFile WF = new WriteFile();
-        String fileName;
-        String filePath;
-        Scanner readIn = new Scanner(System.in);
 
-        System.out.println("Please enter file path!");
-        filePath = readIn.next();
         // Read input text using defined method
-        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
+        String text = RF.readBlockIn(Charset.defaultCharset());
 
         //key = random permutation of 4
         int[] arrange = arrangeKey(key);
