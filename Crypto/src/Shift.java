@@ -33,17 +33,10 @@ class Shift {
     private void bruteShift() throws IOException {
         ReadFile RF = new ReadFile();
         WriteFile WF = new WriteFile();
-        String fileName;
-        String filePath;
-        Scanner readIn = new Scanner(System.in);
 
-        System.out.println("Please enter file path!");
-        filePath = ".\\" + readIn.next();
         // Read input text using defined method
-        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
-
-        //"C:\\Users\\matt\\IdeaProjects\\CSCI_43200_Final_AI-Crypto\\Crypto\\src\\shift.txt"
-
+        String text = RF.readBlockIn(Charset.defaultCharset());
+        
         // This variable stores the value of lowest entropy so far.
         // Initialize with very large value, because all entropies are positive
         // and 0 will be less than all of them.
@@ -63,9 +56,7 @@ class Shift {
         }
 
         // Write output to a file
-        System.out.println("Please enter a new file name!");
-        fileName = readIn.next();
-        WF.outputFile(lowestEntropyString, fileName);
+        WF.outputFile(lowestEntropyString);
         System.out.println(lowestEntropyString);
     }
 
