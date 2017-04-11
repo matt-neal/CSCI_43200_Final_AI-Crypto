@@ -10,7 +10,7 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
-class Anagram {
+class Transposition {
     static String text = new readFile().readFileContents();
 
     //ARRANGE STRING IN GRID FORMAT
