@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.Scanner;
 
 /** Brute force Caeser shift.
  *  Each shift of cipher will be given an entropy (frequency) amount
@@ -9,6 +8,7 @@ import java.util.Scanner;
  */
 
 class Shift {
+
     // This method returns entropy for a string containing some english text
     // calculated using frequencies of individual letters.
     private static double getEntropy(String str) {
@@ -30,13 +30,32 @@ class Shift {
         return res;
     }
 
+    public static String decrypt(String cipherText, int shiftKey)
+    {
+        final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+        cipherText = cipherText.toLowerCase();
+        String plainText = "";
+        for (int i = 0; i < cipherText.length(); i++)
+        {
+            int charPosition = ALPHABET.indexOf(cipherText.charAt(i));
+            int keyVal = (charPosition - shiftKey) % 26;
+            if (keyVal < 0)
+            {
+                keyVal = ALPHABET.length() + keyVal;
+            }
+            char replaceVal = ALPHABET.charAt(keyVal);
+            plainText += replaceVal;
+        }
+        return plainText;
+    }
+
     private void bruteShift() throws IOException {
         ReadFile RF = new ReadFile();
         WriteFile WF = new WriteFile();
 
         // Read input text using defined method
         String text = RF.readBlockIn(Charset.defaultCharset());
-        
+
         // This variable stores the value of lowest entropy so far.
         // Initialize with very large value, because all entropies are positive
         // and 0 will be less than all of them.
