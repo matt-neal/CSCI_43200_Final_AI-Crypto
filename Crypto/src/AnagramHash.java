@@ -8,7 +8,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.*;
 
-class Anagram {
+class AnagramHash {
     ArrayList<String> possibleWords = new ArrayList<String>();
     Dictionary dict;
 
