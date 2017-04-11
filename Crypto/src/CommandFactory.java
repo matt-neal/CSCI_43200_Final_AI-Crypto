@@ -7,9 +7,9 @@ import java.io.IOException;
  */
 class CommandFactory {
 
-    void anagram() throws IOException {
+    void anagram(String key) throws IOException {
         Anagram a = new Anagram();
-        a.execute();
+        a.execute(key);
     }
 
     void keyword() throws IOException {
