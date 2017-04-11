@@ -1,6 +1,7 @@
 # CSCI_43200_Final_AI-Crypto
 ***
 ## CSCI 432 Final Project Repo
+Implemented using Java 1.8 SDK.
 
 ***
 #### Execution Instructions:
