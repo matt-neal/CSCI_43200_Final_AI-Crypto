@@ -34,11 +34,11 @@ class Anagram {
         return list;
     }
 
-    public AnagramSolver(String anagram, String pathToFile) throws FileNotFoundException {
+    public AnagramSolver(String text, String filePath) throws FileNotFoundException {
             System.out.println("Using hash dictionary.");
-            dict = new HashDictionary(new File(pathToFile));
+            dict = new HashDictionary(new File(filePath));
 
-        for (String each : permutations(anagram)) {
+        for (String each : permutations(text)) {
             possibleWords.add(each);
         }
     }
@@ -55,9 +55,25 @@ class Anagram {
     }
 
     public static void execute (String[] args) throws FileNotFoundException {
-        AnagramSolver as = new AnagramSolver(args[0], args[1]);
+        ReadFile RF = new ReadFile();
+        WriteFile WF = new WriteFile();
+        String fileName;
+        String filePath;
+        Scanner readIn = new Scanner(System.in);
+
+        System.out.println("Please enter file path!");
+        filePath = readIn.next();
+        // Read input text using defined method
+        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
+
+        AnagramSolver as = new AnagramSolver(args[0], args[1]);//(String anagram, String pathToFile)
         for (int i=0; i<10; i++) {
             System.out.println("Anagram found: " + as.solve());
         }
+
+        System.out.println("Please enter a new file name!");
+        fileName = readIn.next();
+        WF.outputFile(as.solve(), fileName);
+        System.out.println(as.solve());
     }
 }
