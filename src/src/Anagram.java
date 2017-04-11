@@ -1,24 +1,25 @@
-//BRUTE FORCE TRANSPOSITION USING
-//4 COLUMN KEY AND RANDOMLY GENERATES
-//PERMUTATION OF 1-4 TO CHANGE COLUMN ORDER
-//SHOULD CHECK AGAINST DICTIONARY FOR CORRECT PERMUTATION ORDER
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Scanner;
 
-//CAN ALSO BE DONE DYNAMICALLY (EXHAUSTIVELY USING DICTIONARY ATTACK)
-//BY GUESSING AT KEYWORDS IN THE DICTIONARY TEXT FILE
 
-import java.util.*;
-import java.io.*;
-import java.lang.*;
+/**BRUTE FORCE TRANSPOSITION USING
+ * 4 COLUMN KEY AND RANDOMLY GENERATES
+ * PERMUTATION OF 1-4 TO CHANGE COLUMN ORDER
+ * SHOULD CHECK AGAINST DICTIONARY FOR CORRECT PERMUTATION ORDER
+
+ * CAN ALSO BE DONE DYNAMICALLY (EXHAUSTIVELY USING DICTIONARY ATTACK)
+ * BY GUESSING AT KEYWORDS IN THE DICTIONARY TEXT FILE
+ */
 
 class Anagram {
-    static String text = new readFile().readFileContents();
-
     //ARRANGE STRING IN GRID FORMAT
-    public static int[] arrangeKey(String key) {
+    private int[] arrangeKey(String key) {
         //arrange position of grid
         //i.e. if key is 4 letter word, rows are four columns long
         //String[] keys = key.split(""); //if using dynamically changing key
-        String[] keys = 4;
+        String [] keys = new String[4];
         Arrays.sort(keys);
         int[] num = new int[key.length()];
         for (int x = 0; x < keys.length; x++) {
@@ -34,7 +35,18 @@ class Anagram {
     }
 
     //reorders columns according to key
-    public static String decrypt(String key, String text) {
+    private String decrypt(String key) throws IOException{
+        ReadFile RF = new ReadFile();
+        WriteFile WF = new WriteFile();
+        String fileName;
+        String filePath;
+        Scanner readIn = new Scanner(System.in);
+
+        System.out.println("Please enter file path!");
+        filePath = readIn.next();
+        // Read input text using defined method
+        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
+
         //key = random permutation of 4
         int[] arrange = arrangeKey(key);
         int lenkey = arrange.length;
@@ -47,13 +59,13 @@ class Anagram {
 
         char[][] grid = new char[row][lenkey];
 
-        for (int x = 0; x < lenkey; x++) {
+        for (int anArrange : arrange) {
             for (int y = 0; y < lenkey; y++) {
-                if (arrange[x] == y) {
+                if (anArrange == y) {
                     for (int z = 0; z < row; z++) {
                         grid[z][y] = get[arrange[y]].charAt(z);
 
-                        //check against dicitionary for matches
+                        //check against dictionary for matches
                         //if no match begin loop again
                     }
                 }
@@ -69,11 +81,11 @@ class Anagram {
         return dec;
     }
 
-    public static void execute(String[] args) {
-        String line = System.getProperty("line.separator");
-        scan.useDelimiter(line);
-
-        System.out.println(decrypt(key, text));
-        break;
+    void execute(String key) throws IOException {
+        this.decrypt(key);
     }
 }
+//    String line = System.getProperty("line.separator");
+//        scan.useDelimiter(line);
+//
+//                System.out.println(decrypt(key, text));

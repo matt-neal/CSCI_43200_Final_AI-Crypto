@@ -27,8 +27,10 @@ class DecryptController {
 
             if (Objects.equals(in, "1")) {
                 valid = false;
+                String key = "test";
+                String text = "test";
                 try {
-                    CF.anagram();
+                    CF.anagram(key);
                 }
                 catch (Exception e) {
                     System.out.println("IO Exception: " + e.getMessage());
