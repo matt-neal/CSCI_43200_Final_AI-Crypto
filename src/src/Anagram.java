@@ -53,8 +53,9 @@ class Anagram {
                     for (int z = 0; z < row; z++) {
                         grid[z][y] = get[arrange[y]].charAt(z);
 
-                        //check against dicitionary for matches
-                        //if no match begin loop again
+                        //can check against dictionary
+                        //or attempt entropy (frequency amount) from shift
+                        //that way we don't have to reconcatenate strings
                     }
                 }
             }
