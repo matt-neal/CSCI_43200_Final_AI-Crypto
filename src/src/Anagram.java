@@ -15,8 +15,8 @@ class Anagram {
 
     //ARRANGE STRING IN GRID FORMAT
     public static int[] arrangeKey(String key) {
-        //arrange position of grid
-        //i.e. if key is 4 letter word, rows are four columns long
+        //arranges position of grid
+        //i.e. if key is 4 letter word, grid is four columns wide
         //String[] keys = key.split(""); //if using dynamically changing key
         String[] keys = 4;
         Arrays.sort(keys);
@@ -35,7 +35,7 @@ class Anagram {
 
     //reorders columns according to key
     public static String decrypt(String key, String text) {
-        //key = random permutation of 4
+        //key = random permutations of 4
         int[] arrange = arrangeKey(key);
         int lenkey = arrange.length;
         int lentext = text.length();
