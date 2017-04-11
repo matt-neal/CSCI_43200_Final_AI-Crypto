@@ -40,7 +40,7 @@ class Shift {
         System.out.println("Please enter file path!");
         filePath = readIn.next();
         // Read input text using defined method
-        String text = RF.readBlockIn(filePath, Charset.defaultCharset());
+        String text = RF.readBlockIn("C:\\Users\\matt\\IdeaProjects\\CSCI_43200_Final_AI-Crypto\\Crypto\\src\\shift.txt", Charset.defaultCharset());
 
         // This variable stores the value of lowest entropy so far.
         // Initialize with very large value, because all entropies are positive
