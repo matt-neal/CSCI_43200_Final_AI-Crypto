@@ -1,20 +1,20 @@
-/** Anagram
+/* Anagram
  *  Permutates the strings of characters creating different words
  *  words are searched  within the dictionary.
  *  If the dictionary contains the word, it will be printed.
  */
 
-import java.awt.*;
+//import java.awt.*;
 import java.io.*;
 import java.util.*;
 
 class AnagramHash {
-    ArrayList<String> possibleWords = new ArrayList<String>();
-    Dictionary dict;
+    private ArrayList<String> possibleWords = new ArrayList<>();
+    private Dictionary dict;
 
     // Recursively find permutations of given string of characters.
     private ArrayList<String> permutations(String word) {
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         if (word.length() == 1) {
             list.add(word);
@@ -33,14 +33,15 @@ class AnagramHash {
 
         return list;
     }
-
+    //its already returning text and filePath
     public AnagramSolver(String text, String filePath) throws FileNotFoundException {
-            System.out.println("Using hash dictionary.");
             dict = new HashDictionary(new File(filePath));
-
+            ReadFile RF = new ReadFile();
+            text = RF.readBlockIn(Charset.defaultCharset());
         for (String each : permutations(text)) {
             possibleWords.add(each);
         }
+
     }
 
     public String solve() {
@@ -55,18 +56,17 @@ class AnagramHash {
     }
 
     public static void execute (String[] args) throws FileNotFoundException {
-        ReadFile RF = new ReadFile();
-        WriteFile WF = new WriteFile();
 
-        // Read input text using defined method
-        String text = RF.readBlockIn(Charset.defaultCharset());
+        //refactor into AnagramSolver method
+        WriteFile WF = new WriteFile();
 
         AnagramSolver as = new AnagramSolver(args[0], args[1]);//(String anagram, String pathToFile)
         for (int i=0; i<10; i++) {
             System.out.println("Anagram found: " + as.solve());
+            //WF.outputFile(as.solve());
         }
 
+        //write to file after choosing correct anagram
         WF.outputFile(as.solve());
-        System.out.println(as.solve());
     }
 }
