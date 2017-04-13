@@ -44,7 +44,7 @@ class Shift {
         // or no on each attempt, then storing/saving the correct
         // or reverting to menu if not.
         while (SC.shiftChoices(decrypt)) {
-            key++;
+            ++key;
             decrypt = decrypt(text, key);
         }
     }
