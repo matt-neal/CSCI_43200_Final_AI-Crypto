@@ -50,6 +50,8 @@ class Shift {
     }
 
     void execute() throws IOException {
+        DecryptController DC = new DecryptController();
         this.bruteShift();
+        DC.decryptChoices();
     }
 }
