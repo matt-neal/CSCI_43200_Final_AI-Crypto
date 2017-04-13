@@ -1,19 +1,20 @@
-/**
+/*
  * Created by Loren on 4/11/2017.
  */
 
-import java.awt.*;
+//import java.awt.*;
 import java.io.*;
 import java.util.*;
 
-    public class HashDictionary extends Dictionary {
+    public class HashDictionary extends Dictionary {//not sure if Dictionary class is even needed
+        File dict = new File("dict.txt");
         Hashtable words = new Hashtable();   // List of words
 
-        public HashDictionary(File wordList) throws FileNotFoundException {
+        public HashDictionary(File dict) throws FileNotFoundException {
+            if (!dict.exists()) throw new FileNotFoundException("Error reading: " + dict.getName());
             try {
-                if (!wordList.exists()) throw new FileNotFoundException("Error reading: " + wordList.getName());
 
-                FileReader fr = new FileReader(wordList);
+                FileReader fr = new FileReader(dict);
                 BufferedReader br = new BufferedReader(fr);
                 String word;
 
