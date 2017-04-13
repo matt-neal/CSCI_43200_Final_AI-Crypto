@@ -9,28 +9,7 @@ import java.nio.charset.Charset;
 
 class Shift {
 
-    // This method returns entropy for a string containing some english text
-    // calculated using frequencies of individual letters.
-    private static double getEntropy(String str) {
-        double[] freq = {0.08167, 0.01492, 0.02782, 0.04253, 0.12702, 0.02228,
-                0.02015, 0.06094, 0.06966, 0.00153, 0.00772, 0.04025,
-                0.02406, 0.06749, 0.07507, 0.01929, 0.00095, 0.05987,
-                0.06327, 0.09056, 0.02758, 0.00978, 0.02360, 0.00150,
-                0.01974,0.00074};
-
-        double res = 0;
-        for (int i = 0; i < str.length(); ++i) {
-            char ch = str.charAt(i);
-            if ('a' <= ch && ch <= 'z')
-                res += -Math.log(freq[ch - 'a']);
-            else if ('A' <= ch && ch <= 'Z')
-                res += -Math.log(freq[ch - 'A']);
-            // We don't need to do anything for other characters
-        }
-        return res;
-    }
-
-    public static String decrypt(String cipherText, int shiftKey)
+    private String decrypt(String cipherText, int shiftKey)
     {
         final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
         cipherText = cipherText.toLowerCase();
@@ -50,36 +29,29 @@ class Shift {
     }
 
     private void bruteShift() throws IOException {
+        int key = 1;
+        String decrypt;
         ReadFile RF = new ReadFile();
-        WriteFile WF = new WriteFile();
+        ShiftController SC = new ShiftController();
 
         // Read input text using defined method
         String text = RF.readBlockIn(Charset.defaultCharset());
 
-        // This variable stores the value of lowest entropy so far.
-        // Initialize with very large value, because all entropies are positive
-        // and 0 will be less than all of them.
-        double lowestEntropy = Double.MAX_VALUE;
+        // Initial decrypt attempt
+        decrypt = decrypt(text, key);
 
-        // A string corresponding to the lowest entropy.
-        String lowestEntropyString = "";
-
-        // Try all possible keys
-        for (int key = 0; key < 26; ++key) {
-
-            double entropy = getEntropy(text);
-            if (entropy < lowestEntropy) {
-                lowestEntropy = entropy;
-                lowestEntropyString = text;
-            }
+        // Try all possible keys, allowing the user to verify yes
+        // or no on each attempt, then storing/saving the correct
+        // or reverting to menu if not.
+        while (SC.shiftChoices(decrypt)) {
+            ++key;
+            decrypt = decrypt(text, key);
         }
-
-        // Write output to a file
-        WF.outputFile(lowestEntropyString);
-        System.out.println(lowestEntropyString);
     }
 
     void execute() throws IOException {
+        DecryptController DC = new DecryptController();
         this.bruteShift();
+        DC.decryptChoices();
     }
 }
