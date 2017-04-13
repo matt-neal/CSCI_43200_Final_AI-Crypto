@@ -1,4 +1,4 @@
-/** Anagram
+/* Anagram
  *  Permutates the strings of characters creating different words
  *  words are searched  within the dictionary.
  *  If the dictionary contains the word, it will be printed.
@@ -36,9 +36,12 @@ class AnagramHash {
     //its already returning text and filePath
     public AnagramSolver(String text, String filePath) throws FileNotFoundException {
             dict = new HashDictionary(new File(filePath));
+            ReadFile RF = new ReadFile();
+            text = RF.readBlockIn(Charset.defaultCharset());
         for (String each : permutations(text)) {
             possibleWords.add(each);
         }
+
     }
 
     public String solve() {
@@ -53,19 +56,17 @@ class AnagramHash {
     }
 
     public static void execute (String[] args) throws FileNotFoundException {
-        WriteFile WF = new WriteFile();
 
-        // Read input text using defined method
-        String text = RF.readBlockIn();//(Charset.defaultCharset());
-        ReadFile RF = new ReadFile();
+        //refactor into AnagramSolver method
+        WriteFile WF = new WriteFile();
 
         AnagramSolver as = new AnagramSolver(args[0], args[1]);//(String anagram, String pathToFile)
         for (int i=0; i<10; i++) {
             System.out.println("Anagram found: " + as.solve());
-            WF.outputFile(as.solve());
+            //WF.outputFile(as.solve());
         }
 
         //write to file after choosing correct anagram
-        //WF.outputFile(as.solve());
+        WF.outputFile(as.solve());
     }
 }
