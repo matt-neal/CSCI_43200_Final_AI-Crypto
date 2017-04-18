@@ -1,4 +1,4 @@
-/* Anagram
+/** Anagram
  *  Permutates the strings of characters creating different words
  *  words are searched  within the dictionary.
  *  If the dictionary contains the word, it will be printed.
@@ -6,6 +6,7 @@
 
 //import java.awt.*;
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.*;
 
 class AnagramHash {
@@ -13,7 +14,7 @@ class AnagramHash {
     private Dictionary dict;
 
     // Recursively find permutations of given string of characters.
-    private ArrayList<String> permutations(String word) {
+    private ArrayList<String> permutation(String word) {
         ArrayList<String> list = new ArrayList<>();
 
         if (word.length() == 1) {
@@ -24,7 +25,7 @@ class AnagramHash {
         for (int i=0; i<word.length(); i++) {
             String shorter = word.substring(0, i) + word.substring(i+1);
 
-            ArrayList<String> sublist = permutations(shorter);
+            ArrayList<String> sublist = permutation(shorter);
 
             for (String s : sublist) {
                 list.add(word.charAt(i) + s);
@@ -34,39 +35,38 @@ class AnagramHash {
         return list;
     }
     //its already returning text and filePath
-    public AnagramSolver(String text, String filePath) throws FileNotFoundException {
+    private void anagramSolver(String text, String filePath) throws IOException {
             dict = new HashDictionary(new File(filePath));
             ReadFile RF = new ReadFile();
             text = RF.readBlockIn(Charset.defaultCharset());
-        for (String each : permutations(text)) {
+        for (String each : permutation(text)) {
             possibleWords.add(each);
         }
 
     }
 
-    public String solve() {
+    private String solve() throws IOException{
+        WriteFile WF = new WriteFile();
+        //anagramSolver(args[0], args[1]);
+        for (int i=0; i<10; i++) {
+            System.out.println("Anagram found: " + solve());
+            //WF.outputFile(as.solve());
+        }
         for (String word : possibleWords) {
             System.out.println("Searching for: " + word);
             if (dict.contains(word)) {
                 //System.out.println(dict.getAverageLookupTime());
+                WF.outputFile(word);
                 return word;
             }
         }
+
         return null;
     }
 
-    public static void execute (String[] args) throws FileNotFoundException {
-
-        //refactor into AnagramSolver method
-        WriteFile WF = new WriteFile();
-
-        AnagramSolver as = new AnagramSolver(args[0], args[1]);//(String anagram, String pathToFile)
-        for (int i=0; i<10; i++) {
-            System.out.println("Anagram found: " + as.solve());
-            //WF.outputFile(as.solve());
-        }
-
-        //write to file after choosing correct anagram
-        WF.outputFile(as.solve());
+    public void execute () throws IOException {
+        DecryptController DC = new DecryptController();
+        this.solve();
+        DC.decryptChoices();
     }
 }
