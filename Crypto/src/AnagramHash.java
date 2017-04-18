@@ -1,4 +1,4 @@
-/** Anagram
+/* Anagram
  *  Permutates the strings of characters creating different words
  *  words are searched  within the dictionary.
  *  If the dictionary contains the word, it will be printed.
@@ -8,6 +8,7 @@
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
+//import java.nio.charset.Charset;
 
 class AnagramHash {
     private ArrayList<String> possibleWords = new ArrayList<>();
@@ -36,19 +37,18 @@ class AnagramHash {
     }
     
     //its already returning text and filePath
-    private void anagramSolver(String text, String filePath) throws IOException {
+    public void anagramSolver(String text, String filePath) throws IOException {
             dict = new HashDictionary(new File(filePath));
             ReadFile RF = new ReadFile();
             text = RF.readBlockIn(Charset.defaultCharset());
-        for (String each : permutation(text)) {
-            possibleWords.add(each);
+        for (String each : permutation(text)) {possibleWords.add(each);
         }
 
     }
 
-    private String solve() throws IOException{
-        WriteFile WF = new WriteFile();
-        //anagramSolver(args[0], args[1]);
+    public String solve() throws IOException{
+        //WriteFile WF = new WriteFile();
+        anagramSolver(args[0], args[1]);
         for (int i=0; i<10; i++) {
             System.out.println("Anagram found: " + solve());
             //WF.outputFile(as.solve());
@@ -56,8 +56,7 @@ class AnagramHash {
         for (String word : possibleWords) {
             System.out.println("Searching for: " + word);
             if (dict.contains(word)) {
-                //System.out.println(dict.getAverageLookupTime());
-                WF.outputFile(word);
+                //WF.outputFile(word);
                 return word;
             }
         }
@@ -65,7 +64,7 @@ class AnagramHash {
         return null;
     }
 
-    public void execute () throws IOException {
+    private void execute () throws IOException {
         DecryptController DC = new DecryptController();
         this.solve();
         DC.decryptChoices();
