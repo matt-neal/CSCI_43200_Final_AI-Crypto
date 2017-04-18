@@ -34,6 +34,7 @@ class AnagramHash {
 
         return list;
     }
+    
     //its already returning text and filePath
     private void anagramSolver(String text, String filePath) throws IOException {
             dict = new HashDictionary(new File(filePath));
