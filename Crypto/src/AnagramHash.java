@@ -36,17 +36,17 @@ class AnagramHash {
         return list;
     }
     
-    //its already returning text and filePath
-    public void anagramSolver(String text, String filePath) throws IOException {
+    //returns text and filePath
+    private void anagramSolver(String text, String filePath) throws IOException {
             dict = new HashDictionary(new File(filePath));
             ReadFile RF = new ReadFile();
             text = RF.readBlockIn(Charset.defaultCharset());
-        for (String each : permutation(text)) {possibleWords.add(each);
-        }
-
+        possibleWords.addAll(permutation(text));  //changed this from for loop below
+        //for (String each : permutation(text)) {possibleWords.add(each);
+        //}
     }
 
-    public String solve() throws IOException{
+    private String solve() throws IOException{
         //WriteFile WF = new WriteFile();
         anagramSolver(args[0], args[1]);
         for (int i=0; i<10; i++) {
@@ -60,7 +60,6 @@ class AnagramHash {
                 return word;
             }
         }
-
         return null;
     }
 
