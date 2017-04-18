@@ -40,7 +40,7 @@ import java.util.*;
             while (words.hasMoreElements()) {
                 if (word.equals(words.nextElement())) {
                     //avgLookupTime = avgLookupTime * (avgIndex-1)/avgIndex + (System.nanoTime() - time)/avgIndex;
-                    avgIndex++;
+                    //avgIndex++;
                     return true;
                 }
             }
