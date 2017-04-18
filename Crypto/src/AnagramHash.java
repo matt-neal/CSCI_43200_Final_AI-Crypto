@@ -14,6 +14,7 @@ class AnagramHash {
     private ArrayList<String> possibleWords = new ArrayList<>();
     private Dictionary dict;
 
+
     // Recursively find permutations of given string of characters.
     private ArrayList<String> permutation(String word) {
         ArrayList<String> list = new ArrayList<>();
