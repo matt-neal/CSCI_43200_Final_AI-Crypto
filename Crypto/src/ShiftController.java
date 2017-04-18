@@ -10,22 +10,26 @@ class ShiftController {
     private WriteFile WF = new WriteFile();
 
     boolean shiftChoices(String text) throws IOException {
-        System.out.println(text);
-        System.out.println("Is this correct?");
-        System.out.println("1 for yes, 2 for no.");
-        String in = shiftChoice.next();
-
-        if (Objects.equals(in, "1")) {
-            WF.outputFile(text);
+        try {
             System.out.println(text);
-            return false;
+            System.out.println("Is this correct?");
+            System.out.println("1 for yes, 2 for no.");
+            String in = shiftChoice.next();
+
+            if (Objects.equals(in, "1")) {
+                WF.outputFile(text);
+                System.out.println(text);
+                return false;
+            } else if (Objects.equals(in, "2")) {
+                return true;
+            } else {
+                System.out.println("Invalid input. Try again.");
+                return true;
+            }
         }
-        else if (Objects.equals(in, "2")) {
-            return true;
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("Invalid input. Try again.");
-            return true;
-        }
+        return true;
     }
 }

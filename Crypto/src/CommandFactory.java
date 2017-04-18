@@ -8,22 +8,41 @@ import java.io.IOException;
 class CommandFactory {
 
     void anagram() throws IOException {
-        AnagramHash ah = new AnagramHash();
-        ah.execute();
+        try {
+            AnagramHash ah = new AnagramHash();
+            ah.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void keyword() throws IOException {
-        Keyword k = new Keyword();
-        k.execute();
+        try {
+            Keyword k = new Keyword();
+            k.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void shift() throws IOException {
-        Shift s = new Shift();
-        s.execute();
+        try {
+            Shift s = new Shift();
+            s.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void automate() throws IOException {
-        Automate au = new Automate();
-        au.execute();
+        try {
+            Automate au = new Automate();
+            au.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
