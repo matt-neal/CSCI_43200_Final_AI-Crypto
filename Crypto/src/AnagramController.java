@@ -10,34 +10,38 @@ class AnagramController {
     private WriteFile WF = new WriteFile();
 
     boolean anagramChoices(String text) throws IOException {
-        System.out.println(text);
-        System.out.println("Is this correct?");
-        System.out.println("1 for yes, 2 for no.");
-        String in = shiftChoice.next();
-
-        if (Objects.equals(in, "1")) {
-            WF.outputFile(text);
+        try {
             System.out.println(text);
-            System.out.println("Check for more?");
+            System.out.println("Is this correct?");
             System.out.println("1 for yes, 2 for no.");
-            String nextIn = shiftChoice.next();
-            if (Objects.equals(nextIn, "1")) {
-                return true;
-            }
-            else if (Objects.equals(nextIn, "2")) {
+            String in = shiftChoice.next();
+
+            if (Objects.equals(in, "1")) {
+                WF.outputFile(text);
+                System.out.println(text);
+                System.out.println("Check for more?");
+                System.out.println("1 for yes, 2 for no.");
+                String nextIn = shiftChoice.next();
+                if (Objects.equals(nextIn, "1")) {
+                    return true;
+                } else if (Objects.equals(nextIn, "2")) {
+                    return false;
+                } else {
+                    System.out.println("Invalid choice.");
+                }
                 return false;
             }
-            else {
-                System.out.println("Invalid choice.");
+            else if (Objects.equals(in, "2")) {
+                return true;
             }
-            return false;
+            else {
+                System.out.println("Invalid input. Try again.");
+                return true;
+            }
         }
-        else if (Objects.equals(in, "2")) {
-            return true;
+        catch (Exception e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println("Invalid input. Try again.");
-            return true;
-        }
+        return true;
     }
 }

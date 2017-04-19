@@ -13,7 +13,7 @@ class Shift {
     {
         final String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
         cipherText = cipherText.toLowerCase();
-        String plainText = "";
+        StringBuilder plainText = new StringBuilder();
         for (int i = 0; i < cipherText.length(); i++)
         {
             int charPosition = ALPHABET.indexOf(cipherText.charAt(i));
@@ -23,35 +23,45 @@ class Shift {
                 keyVal = ALPHABET.length() + keyVal;
             }
             char replaceVal = ALPHABET.charAt(keyVal);
-            plainText += replaceVal;
+            plainText.append(replaceVal);
         }
-        return plainText;
+        return plainText.toString();
     }
 
     private void bruteShift() throws IOException {
-        int key = 1;
-        String decrypt;
-        ReadFile RF = new ReadFile();
-        ShiftController SC = new ShiftController();
+        try {
+            int key = 1;
+            String decoded;
+            ReadFile RF = new ReadFile();
+            ShiftController SC = new ShiftController();
 
-        // Read input text using defined method
-        String text = RF.readBlockIn(Charset.defaultCharset());
+            // Read input text using defined method
+            String text = RF.readBlockIn(Charset.defaultCharset());
 
-        // Initial decrypt attempt
-        decrypt = decrypt(text, key);
+            // Initial decrypt attempt
+            decoded = decrypt(text, key);
 
-        // Try all possible keys, allowing the user to verify yes
-        // or no on each attempt, then storing/saving the correct
-        // or reverting to menu if not.
-        while (SC.shiftChoices(decrypt)) {
-            ++key;
-            decrypt = decrypt(text, key);
+            // Try all possible keys, allowing the user to verify yes
+            // or no on each attempt, then storing/saving the correct
+            // or reverting to menu if not.
+            while (SC.shiftChoices(decoded)) {
+                ++key;
+                decoded = decrypt(text, key);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
     void execute() throws IOException {
-        DecryptController DC = new DecryptController();
-        this.bruteShift();
-        DC.decryptChoices();
+        try {
+            DecryptController DC = new DecryptController();
+            this.bruteShift();
+            DC.decryptChoices();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

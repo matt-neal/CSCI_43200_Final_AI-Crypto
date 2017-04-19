@@ -1,19 +1,16 @@
-/*
- * Created by Loren on 4/11/2017.
- */
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Enumeration;
+import java.util.Hashtable;
 
-//import java.awt.*;
-import java.io.*;
-import java.util.*;
+class HashDictionary {
+    // List of words
+    private Hashtable<String, String> words = new Hashtable<>();
 
-    public class HashDictionary extends Dictionary {//not sure if Dictionary class is even needed
-        File dict = new File("dict.txt");
-        Hashtable words = new Hashtable();   // List of words
-
-        public HashDictionary(File dict) throws FileNotFoundException {
-            if (!dict.exists()) throw new FileNotFoundException("Error reading: " + dict.getName());
+        HashDictionary (File dict) throws FileNotFoundException {
             try {
-
                 FileReader fr = new FileReader(dict);
                 BufferedReader br = new BufferedReader(fr);
                 String word;
@@ -26,21 +23,17 @@ import java.util.*;
                 br.close();
                 fr.close();
             }
-            catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
+            catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
         // Hash search.
-        public boolean contains(String word) {
-            Enumeration words = this.words.keys();
-
-            //long time = System.nanoTime();
+        boolean contains(String word) {
+            Enumeration<String> words = this.words.keys();
 
             while (words.hasMoreElements()) {
                 if (word.equals(words.nextElement())) {
-                    //avgLookupTime = avgLookupTime * (avgIndex-1)/avgIndex + (System.nanoTime() - time)/avgIndex;
-                    //avgIndex++;
                     return true;
                 }
             }

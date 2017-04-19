@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 class DecryptController {
     private boolean valid = true;
-    CommandFactory CF = new CommandFactory();
+    private CommandFactory CF = new CommandFactory();
 
     void decryptChoices(){
         Scanner landingChoice = new Scanner(System.in);
@@ -27,10 +27,8 @@ class DecryptController {
 
             if (Objects.equals(in, "1")) {
                 valid = false;
-                String key = "test";
-                String text = "test";
                 try {
-                    CF.anagram(key);
+                    CF.anagram();
                 }
                 catch (Exception e) {
                     System.out.println("IO Exception: " + e.getMessage());

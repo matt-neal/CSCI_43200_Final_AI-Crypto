@@ -10,13 +10,25 @@ import java.util.Scanner;
  */
 class ReadFile {
     String readBlockIn(Charset encoding) throws IOException {
-        String filePath;
-        Scanner readIn = new Scanner(System.in);
         try {
-            System.out.println("Please enter file name!");
-            filePath = System.getProperty("user.dir") + "\\" + readIn.next();
+            String filePath = getFileName();
             byte[] encoded = Files.readAllBytes(Paths.get(filePath));
             return new String(encoded, encoding);
+        }
+        catch (Exception e) {
+            System.out.println("File Read Exception: " + e.getMessage());
+            e.printStackTrace();
+            return "Failure.";
+        }
+    }
+
+    String getFileName() throws IOException {
+        try {
+            String filePath;
+            Scanner readIn = new Scanner(System.in);
+            System.out.println("Please enter file name!");
+            filePath = System.getProperty("user.dir") + "\\" + readIn.next();
+            return filePath;
         }
         catch (Exception e) {
             System.out.println("File Read Exception: " + e.getMessage());
