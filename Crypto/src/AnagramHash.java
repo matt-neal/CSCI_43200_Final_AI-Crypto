@@ -24,7 +24,7 @@ class AnagramHash {
         }
 
         for (int i = 0; i < word.length(); i++) {
-            String shorter = word.substring(0, i) + word.substring(++i);
+            String shorter = word.substring(0, i) + word.substring(i+1);
             ArrayList<String> sublist = permutation(shorter);
             for (String s : sublist) {
                 list.add(word.charAt(i) + s);

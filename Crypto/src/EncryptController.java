@@ -2,16 +2,14 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Front Controller to manage functionality and give the user options.
- * Designed so that if any additional functionality is added at a later date,
- * Refactoring is not particularly necessary.
+ * Encrypt controller that calls the command class for executing all methods of
+ * Encryption. Can easily be expanded to add new types of Encryption as well.
  */
-class FrontController {
+class EncryptController {
     private boolean valid = true;
-    private DecryptController DC = new DecryptController();
-    private EncryptController EC = new EncryptController();
+    private CommandFactory CF = new CommandFactory();
 
-    void landingPage() {
+    void EncryptChoices(){
         Scanner landingChoice = new Scanner(System.in);
 
         /*
@@ -21,17 +19,27 @@ class FrontController {
          */
         while (valid) {
             System.out.println("Choose an option.");
-            System.out.println("1 for decryption.");
+            System.out.println("1 for shift.");
+            System.out.println("2 to quit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
                 valid = false;
-                DC.decryptChoices();
+                try {
+                    CF.shift();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
-            else if (Objects.equals(in, "2"))
-            {
+            else if (Objects.equals(in, "2")) {
                 valid = false;
-                EC.EncryptChoices();
+                try {
+                    System.exit(0);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 System.out.println("Invalid entry, try again.");

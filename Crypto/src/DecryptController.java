@@ -20,9 +20,9 @@ class DecryptController {
         while (valid) {
             System.out.println("Choose an option.");
             System.out.println("1 for anagram.");
-            System.out.println("2 for keyword.");
-            System.out.println("3 for shift.");
-            System.out.println("4 for automation.");
+            System.out.println("2 for shift.");
+            System.out.println("3 for automation.");
+            System.out.println("4 to quit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
@@ -31,37 +31,33 @@ class DecryptController {
                     CF.anagram();
                 }
                 catch (Exception e) {
-                    System.out.println("IO Exception: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
             else if (Objects.equals(in, "2")) {
                 valid = false;
                 try {
-                    CF.keyword();
+                    CF.shift();
                 }
                 catch (Exception e) {
-                    System.out.println("IO Exception: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
             else if (Objects.equals(in, "3")) {
                 valid = false;
                 try {
-                    CF.shift();
+                    CF.automate();
                 }
                 catch (Exception e) {
-                    System.out.println("IO Exception: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
             else if (Objects.equals(in, "4")) {
                 valid = false;
                 try {
-                    CF.automate();
+                    System.exit(0);
                 }
                 catch (Exception e) {
-                    System.out.println("IO Exception: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
