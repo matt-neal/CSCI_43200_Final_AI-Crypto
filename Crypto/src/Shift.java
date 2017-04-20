@@ -8,6 +8,8 @@ import java.nio.charset.Charset;
  */
 
 class Shift {
+    private DecryptController DC = new DecryptController();
+    private ShiftController SC = new ShiftController();
 
     private String decrypt(String cipherText, int shiftKey)
     {
@@ -18,10 +20,6 @@ class Shift {
         {
             int charPosition = ALPHABET.indexOf(cipherText.charAt(i));
             int keyVal = (charPosition - shiftKey) % 26;
-            if (keyVal < 0)
-            {
-                keyVal = ALPHABET.length() + keyVal;
-            }
             char replaceVal = ALPHABET.charAt(keyVal);
             plainText.append(replaceVal);
         }
@@ -33,7 +31,6 @@ class Shift {
             int key = 1;
             String decoded;
             ReadFile RF = new ReadFile();
-            ShiftController SC = new ShiftController();
 
             // Read input text using defined method
             String text = RF.readBlockIn(Charset.defaultCharset());
@@ -56,7 +53,6 @@ class Shift {
 
     void execute() throws IOException {
         try {
-            DecryptController DC = new DecryptController();
             this.bruteShift();
             DC.decryptChoices();
         }

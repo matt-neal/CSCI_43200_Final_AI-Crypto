@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 
 class AnagramHash {
+    private DecryptController DC = new DecryptController();
     private ArrayList<String> possibleWords = new ArrayList<>();
     private HashDictionary dict;
 
@@ -67,7 +68,6 @@ class AnagramHash {
 
     void execute() throws IOException {
         try {
-            DecryptController DC = new DecryptController();
             this.solve();
             DC.decryptChoices();
         }
