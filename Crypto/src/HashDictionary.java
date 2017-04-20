@@ -5,6 +5,11 @@ import java.io.FileReader;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+/**
+ * Hash Dictionary class that builds a hash table from the
+ * dictionary text file for more efficient runtime analysis
+ * on anagrams.
+ */
 class HashDictionary {
     // List of words
     private Hashtable<String, String> words = new Hashtable<>();

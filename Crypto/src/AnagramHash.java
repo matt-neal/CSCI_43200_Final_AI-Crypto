@@ -24,7 +24,7 @@ class AnagramHash {
         }
 
         for (int i = 0; i < word.length(); i++) {
-            String shorter = word.substring(0, i) + word.substring(++i);
+            String shorter = word.substring(0, i) + word.substring(i+1);
             ArrayList<String> sublist = permutation(shorter);
             for (String s : sublist) {
                 list.add(word.charAt(i) + s);
@@ -54,7 +54,6 @@ class AnagramHash {
             WriteFile WF = new WriteFile();
 
             for (String word : possibleWords) {
-                System.out.println("Searching for: " + word);
                 if (dict.contains(word)) {
                     WF.outputFile(word);
                     System.out.println("Anagram found: " + word);

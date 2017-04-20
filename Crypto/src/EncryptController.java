@@ -2,15 +2,15 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Decrypt controller that calls the command class for executing all methods of
- * decryption. Can easily be expanded to add new types of decryption as well.
+ * Encrypt controller that calls the command class for executing all methods of
+ * Encryption. Can easily be expanded to add new types of Encryption as well.
  */
-class DecryptController {
+class EncryptController {
     private boolean valid = true;
     private CommandFactory CF = new CommandFactory();
     private FrontController FC = new FrontController();
 
-    void decryptChoices(){
+    void EncryptChoices(){
         Scanner landingChoice = new Scanner(System.in);
 
         /*
@@ -20,17 +20,15 @@ class DecryptController {
          */
         while (valid) {
             System.out.println("Choose an option.");
-            System.out.println("1 for anagram.");
-            System.out.println("2 for shift.");
-            System.out.println("3 for automation.");
-            System.out.println("4 to return to main menu.");
-            System.out.println("5 to quit.");
+            System.out.println("1 for shift.");
+            System.out.println("2 to return to main menu.");
+            System.out.println("3 to quit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
                 valid = false;
                 try {
-                    CF.anagram();
+                    CF.shiftEncrypt();
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -38,32 +36,9 @@ class DecryptController {
             }
             else if (Objects.equals(in, "2")) {
                 valid = false;
-                try {
-                    CF.shift();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                FC.landingPage();
             }
             else if (Objects.equals(in, "3")) {
-                valid = false;
-                try {
-                    CF.automate();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (Objects.equals(in, "4")) {
-                valid = false;
-                try {
-                    FC.landingPage();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (Objects.equals(in, "5")) {
                 valid = false;
                 try {
                     System.exit(0);

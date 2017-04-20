@@ -17,20 +17,20 @@ class CommandFactory {
         }
     }
 
-    void keyword() throws IOException {
+    void shift() throws IOException {
         try {
-            Keyword k = new Keyword();
-            k.execute();
+            Shift s = new Shift();
+            s.execute();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    void shift() throws IOException {
+    void shiftEncrypt() throws IOException {
         try {
             Shift s = new Shift();
-            s.execute();
+            s.executeEncrypt();
         }
         catch (Exception e) {
             e.printStackTrace();
