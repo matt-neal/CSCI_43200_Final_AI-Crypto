@@ -22,6 +22,8 @@ class FrontController {
         while (valid) {
             System.out.println("Choose an option.");
             System.out.println("1 for decryption.");
+            System.out.println("2 for encryption.");
+            System.out.println("3 to exit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
@@ -32,6 +34,11 @@ class FrontController {
             {
                 valid = false;
                 EC.EncryptChoices();
+            }
+            else if (Objects.equals(in, "3"))
+            {
+                valid = false;
+                System.exit(0);
             }
             else {
                 System.out.println("Invalid entry, try again.");

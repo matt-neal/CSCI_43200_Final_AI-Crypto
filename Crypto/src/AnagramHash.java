@@ -54,7 +54,6 @@ class AnagramHash {
             WriteFile WF = new WriteFile();
 
             for (String word : possibleWords) {
-                System.out.println("Searching for: " + word);
                 if (dict.contains(word)) {
                     WF.outputFile(word);
                     System.out.println("Anagram found: " + word);
