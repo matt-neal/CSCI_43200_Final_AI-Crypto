@@ -8,7 +8,6 @@ import java.util.Scanner;
 class DecryptController {
     private boolean valid = true;
     private CommandFactory CF = new CommandFactory();
-    private FrontController FC = new FrontController();
 
     void decryptChoices(){
         Scanner landingChoice = new Scanner(System.in);
@@ -23,8 +22,7 @@ class DecryptController {
             System.out.println("1 for anagram.");
             System.out.println("2 for shift.");
             System.out.println("3 for automation.");
-            System.out.println("4 to return to main menu.");
-            System.out.println("5 to quit.");
+            System.out.println("4 to quit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
@@ -55,15 +53,6 @@ class DecryptController {
                 }
             }
             else if (Objects.equals(in, "4")) {
-                valid = false;
-                try {
-                    FC.landingPage();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            else if (Objects.equals(in, "5")) {
                 valid = false;
                 try {
                     System.exit(0);

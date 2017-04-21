@@ -4,15 +4,17 @@ import java.util.Objects;
 import java.util.Scanner;
 
 /**
- * Controller class to handle the Shift function.
+ * Controller class to handle the automate Shift function.
  */
-class ShiftController {
+class AutoController {
     private Scanner shiftChoice = new Scanner(System.in);
     private WriteFile WF = new WriteFile();
     private StoreData SD = new StoreData();
     private DatabaseController DBC = new DatabaseController();
 
-    boolean shiftChoices(String text, int key) throws IOException {
+    boolean autoChoices(String text, int key) throws IOException {
+
+        System.out.println(text);
         try {
             System.out.println(text);
             System.out.println("Is this correct?");
@@ -24,14 +26,15 @@ class ShiftController {
                 WF.outputFile(text);
                 SD.databaseUpdateShift(conn, key);
                 return false;
-            } else if (Objects.equals(in, "2")) {
+            }
+            else if (Objects.equals(in, "2")) {
                 return true;
-            } else {
+            }
+            else {
                 System.out.println("Invalid input. Try again.");
                 return true;
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return true;

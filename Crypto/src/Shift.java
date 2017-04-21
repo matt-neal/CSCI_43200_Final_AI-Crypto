@@ -44,7 +44,7 @@ class Shift {
             // Try all possible keys, allowing the user to verify yes
             // or no on each attempt, then storing/saving the correct
             // or reverting to menu if not.
-            while (SC.shiftChoices(decoded)) {
+            while (SC.shiftChoices(decoded, key)) {
                 ++key;
                 decoded = decrypt(text, key);
             }
@@ -54,22 +54,10 @@ class Shift {
         }
     }
 
-    void automateShift(int key) throws IOException {
-        try {
-            String decoded;
-            ReadFile RF = new ReadFile();
-
-            // Read input text using defined method
-            String text = RF.readBlockIn(Charset.defaultCharset());
-
-            // Initial decrypt attempt
-            decoded = decrypt(text, key);
-
-            WF.outputFile(decoded);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    String automateShift(String text, int key) {
+        String decoded;
+        decoded = decrypt(text, key);
+        return decoded;
     }
 
     private void encryptShift() throws IOException {
