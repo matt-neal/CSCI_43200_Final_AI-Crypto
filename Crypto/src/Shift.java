@@ -54,22 +54,9 @@ class Shift {
         }
     }
 
-    void automateShift(int key) throws IOException {
-        try {
-            String decoded;
-            ReadFile RF = new ReadFile();
-
-            // Read input text using defined method
-            String text = RF.readBlockIn(Charset.defaultCharset());
-
-            // Initial decrypt attempt
-            decoded = decrypt(text, key);
-
-            WF.outputFile(decoded);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+    void automateShift(String text, int key) {
+        String decoded;
+        decoded = decrypt(text, key);
     }
 
     private void encryptShift() throws IOException {
