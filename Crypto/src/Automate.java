@@ -1,9 +1,6 @@
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.sql.*;
-import java.util.Scanner;
-
-import static java.sql.Types.ARRAY;
 import static java.sql.Types.NULL;
 
 /**
@@ -26,7 +23,7 @@ class Automate {
     private Shift s = new Shift();
     private ReadFile RF = new ReadFile();
 
-    int highestFrequencyShift(Connection conn) throws SQLException {
+    private int highestFrequencyShift(Connection conn) throws SQLException {
         try {
             Statement statement = conn.createStatement();
             String queryString = "select shiftkey from [shift] where uses = ( select max(uses) from [shift]);";
@@ -40,7 +37,7 @@ class Automate {
         return NULL;
     }
 
-    int averageShift(Connection conn) throws SQLException {
+    private int averageShift(Connection conn) throws SQLException {
         try {
             Statement statement = conn.createStatement();
             String queryString = "select shiftkey from [shift] where shiftkey = (select SUM(USES)/COUNT(USES) from [shift] WHERE USES != '0');";
@@ -53,7 +50,7 @@ class Automate {
         return NULL;
     }
 
-    int highestShift(Connection conn) throws SQLException {
+    private int highestShift(Connection conn) throws SQLException {
         try {
             Statement statement = conn.createStatement();
             String queryString = "select shiftkey from [shift] where shiftkey = '25';";
@@ -67,7 +64,7 @@ class Automate {
         return NULL;
     }
 
-    int lowestShift(Connection conn) throws SQLException {
+    private int lowestShift(Connection conn) throws SQLException {
         try {
             Statement statement = conn.createStatement();
             String queryString = "select shiftkey from [shift] where shiftkey = '1';";
