@@ -95,11 +95,15 @@ class Automate {
 
             while (AC.autoChoices(decrypt, keys[i])) {
                 ++i;
+                if (i > keys.length) {
+                    throw new Exception();
+                }
                 decrypt = s.automateShift(text, keys[i]);
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Automation failed, please proceed manually.");
+            s.execute();
         }
     }
 
