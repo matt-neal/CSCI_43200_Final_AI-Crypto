@@ -2,14 +2,25 @@
 ***
 ## CSCI 432 Final Project Repo
 Implemented using Java 1.8 SDK.
+Requires com.microsoft.sqlserver.jdbc.SQLServerDriver to be installed in your PATH to execute.
+
+A link to the report can be found here:
+https://docs.google.com/document/d/1Tgl5qpqXgr8-uGcsuTZVEgGIXlDPkDxGqvfEcX6I26s/edit?usp=sharing
 
 ***
 #### Execution Instructions:
-1) A .jar file is included for those who wish to solely run the code without updates.
+There is a makefile included for those who wish to fork the code and execute locally.
+1) Navigate to the directory with the project files
+2) Type "make all"
+3) Type "java Crypto"
 
-2) There is also a makefile included for those who wish to branch the code and execute locally without the .jar or to review the code itself.
-
-3) The .jar is a double click execution. The java make file can be used by navigating to the host directory on your machine, typing make all, then Crypto.
+If you would like to attempt solutions for your own shift/anagram files,
+either update the included .txt files in the directory, or add new .txt
+files to the same locale as the others. The system is already configured
+to prepend the current user directory to the file path, so when typing in file
+names, only the name and extension is needed, such as "shift.txt" (sans quotations).
 
 ***
-#### Authors - Matthew Neal and Loren Jones
+#### Authors
+1) Matthew Neal - mattneal@iupui.edu
+2) Loren Jones - lnjblue@gmail.com
