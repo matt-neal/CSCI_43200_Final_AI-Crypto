@@ -8,7 +8,6 @@ import java.util.Scanner;
 class EncryptController {
     private boolean valid = true;
     private CommandFactory CF = new CommandFactory();
-    private FrontController FC = new FrontController();
 
     void EncryptChoices(){
         Scanner landingChoice = new Scanner(System.in);
@@ -21,8 +20,7 @@ class EncryptController {
         while (valid) {
             System.out.println("Choose an option.");
             System.out.println("1 for shift.");
-            System.out.println("2 to return to main menu.");
-            System.out.println("3 to quit.");
+            System.out.println("2 to quit.");
             String in = landingChoice.next();
 
             if (Objects.equals(in, "1")) {
@@ -35,10 +33,6 @@ class EncryptController {
                 }
             }
             else if (Objects.equals(in, "2")) {
-                valid = false;
-                FC.landingPage();
-            }
-            else if (Objects.equals(in, "3")) {
                 valid = false;
                 try {
                     System.exit(0);

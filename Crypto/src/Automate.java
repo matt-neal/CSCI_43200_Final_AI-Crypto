@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import static java.sql.Types.NULL;
 
 /**
@@ -88,9 +91,11 @@ class Automate {
             int lKey = lowestShift(conn);
             int[] keys = {hfKey,avgKey,hKey,lKey};
             int i = 0;
-            while (AC.autoChoices(text)) {
-                s.automateShift(text, keys[i]);
+            String decrypt = s.automateShift(text, keys[i]);
+
+            while (AC.autoChoices(decrypt, keys[i])) {
                 ++i;
+                decrypt = s.automateShift(text, keys[i]);
             }
         }
         catch (Exception e) {

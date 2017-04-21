@@ -44,7 +44,7 @@ class Shift {
             // Try all possible keys, allowing the user to verify yes
             // or no on each attempt, then storing/saving the correct
             // or reverting to menu if not.
-            while (SC.shiftChoices(decoded)) {
+            while (SC.shiftChoices(decoded, key)) {
                 ++key;
                 decoded = decrypt(text, key);
             }
@@ -54,9 +54,10 @@ class Shift {
         }
     }
 
-    void automateShift(String text, int key) {
+    String automateShift(String text, int key) {
         String decoded;
         decoded = decrypt(text, key);
+        return decoded;
     }
 
     private void encryptShift() throws IOException {
