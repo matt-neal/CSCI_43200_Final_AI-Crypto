@@ -35,10 +35,9 @@ class AnagramHash {
 
     private void anagramStart() throws IOException {
         try {
-            String text, filePath;
+            String text;
             ReadFile RF = new ReadFile();
-            filePath = RF.getFileName();
-            dict = new HashDictionary(new File(filePath));
+            dict = new HashDictionary(new File("dict.txt"));
 
             text = RF.readBlockIn(Charset.defaultCharset());
             possibleWords.addAll(permutation(text));
